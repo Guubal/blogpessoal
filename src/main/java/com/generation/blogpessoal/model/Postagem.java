@@ -1,0 +1,64 @@
+package com.generation.blogpessoal.model;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "tb_postagens")
+public class Postagem {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotBlank(message = "Titulo é requirido!")
+    @Size(min = 5, max = 100, message = "Titulo deve ter entre 5 a 100")
+    private String titulo;
+    @NotBlank(message = "O texto é requirido!")
+    @Size(min = 10, max = 1000, message = "Texto deve ter entre 10t a 1000")
+    private String texto;
+    @UpdateTimestamp
+    private LocalDateTime data;
+
+    public Postagem(Long id, String titulo, String texto, LocalDateTime data) {
+        this.id = id;
+        this.titulo = titulo;
+        this.texto = texto;
+        this.data = data;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getTexto() {
+        return texto;
+    }
+
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
+
+    public LocalDateTime getData() {
+        return data;
+    }
+
+    public void setData(LocalDateTime data) {
+        this.data = data;
+    }
+
+}
