@@ -22,13 +22,6 @@ public class Postagem {
     @UpdateTimestamp
     private LocalDateTime data;
 
-    public Postagem(Long id, String titulo, String texto, LocalDateTime data) {
-        this.id = id;
-        this.titulo = titulo;
-        this.texto = texto;
-        this.data = data;
-    }
-
     public Long getId() {
         return id;
     }
