@@ -1,5 +1,6 @@
 package com.generation.blogpessoal.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -13,14 +14,21 @@ public class Postagem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotBlank(message = "Titulo é requirido!")
     @Size(min = 5, max = 100, message = "Titulo deve ter entre 5 a 100")
     private String titulo;
+
     @NotBlank(message = "O texto é requirido!")
     @Size(min = 10, max = 1000, message = "Texto deve ter entre 10t a 1000")
     private String texto;
+
     @UpdateTimestamp
     private LocalDateTime data;
+
+    @ManyToOne
+    @JsonIgnoreProperties("postagem")
+    private Tema tema;
 
     public Long getId() {
         return id;
@@ -54,4 +62,11 @@ public class Postagem {
         this.data = data;
     }
 
+    public Tema getTema() {
+        return tema;
+    }
+
+    public void setTema(Tema tema) {
+        this.tema = tema;
+    }
 }
