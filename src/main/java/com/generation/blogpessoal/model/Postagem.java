@@ -11,16 +11,17 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "tb_postagens")
 public class Postagem {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Titulo é requirido!")
-    @Size(min = 5, max = 100, message = "Titulo deve ter entre 5 a 100")
+    @NotBlank(message = "O Atributo título é Obrigatório!")
+    @Size(min = 5, max = 100, message = "O Atributo título deve conter no mínimo 05 e no máximo 100 caracteres")
     private String titulo;
 
-    @NotBlank(message = "O texto é requirido!")
-    @Size(min = 10, max = 1000, message = "Texto deve ter entre 10t a 1000")
+    @NotBlank(message = "O Atributo texto é Obrigatório!")
+    @Size(min = 10, max = 1000, message = "O Atributo texto deve conter no mínimo 10 e no máximo 1000 caracteres")
     private String texto;
 
     @UpdateTimestamp
@@ -30,8 +31,14 @@ public class Postagem {
     @JsonIgnoreProperties("postagem")
     private Tema tema;
 
+    @ManyToOne
+    @JsonIgnoreProperties("postagem")
+    private Usuario usuario;
+
+    /*Insira os Getters and Setters*/
+
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -39,7 +46,7 @@ public class Postagem {
     }
 
     public String getTitulo() {
-        return titulo;
+        return this.titulo;
     }
 
     public void setTitulo(String titulo) {
@@ -47,7 +54,7 @@ public class Postagem {
     }
 
     public String getTexto() {
-        return texto;
+        return this.texto;
     }
 
     public void setTexto(String texto) {
@@ -55,7 +62,7 @@ public class Postagem {
     }
 
     public LocalDateTime getData() {
-        return data;
+        return this.data;
     }
 
     public void setData(LocalDateTime data) {
@@ -63,10 +70,19 @@ public class Postagem {
     }
 
     public Tema getTema() {
-        return tema;
+        return this.tema;
     }
 
     public void setTema(Tema tema) {
         this.tema = tema;
     }
+
+    public Usuario getUsuario() {
+        return this.usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
 }
